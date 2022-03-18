@@ -1,9 +1,13 @@
-import { serve } from "https://deno.land/std@0.120.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.130.0/http/server.ts";
 
-function handler(req: Request): Response {
-  console.log("hee")
-  return new Response("Hello world");
-}
+const port = 8080;
 
-console.log("Listening on http://localhost:8000");
-await serve(handler);
+const handler = (request: Request): Response => {
+  let body = "Your user-agent is:\n\n";
+  body += request.headers.get("user-agent") || "Unknown";
+
+  return new Response(body, { status: 200 });
+};
+
+console.log(`HTTP webserver running. Access it at: http://localhost:8080/`);
+await serve(handler, { port });

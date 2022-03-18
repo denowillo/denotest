@@ -3,6 +3,8 @@ import { serve } from "https://deno.land/std@0.130.0/http/server.ts";
 const port = 8080;
 
 const handler = (request: Request): Response => {
+  console.log(request)
+
   let body = "Your user-agent is:\n\n";
   body += request.headers.get("user-agent") || "Unknown";
 
